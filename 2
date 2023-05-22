@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class BowlingBall {
+	int weight;
+	string color;
+public:
+	static int count;
+	BowlingBall() {
+		count++;
+	} // = default;
+
+	BowlingBall(int weight, string color) {
+		count++;
+		setParams(weight, color);
+	}
+
+	BowlingBall(const BowlingBall &other) {
+		setParams(other.weight, other.color);
+		count++;
+	}
+
+	bool setWeight(int weight) {
+		if (weight > 0) {
+			this->weight = weight;
+			return true;
+		}
+		return false;
+	}
+	bool setColor(string color) {
+		if (color != "") {
+			this->color = color;
+			return true;
+		}
+		return false;
+	}
+	void setParams(int weight, string color) {
+		setWeight(weight);
+		setColor(color);
+	}
+	void print() {
+		cout << weight << " (" << color << ")\n";
+	}
+
+	// ++b
+	BowlingBall& operator++() {
+		weight++;
+		return *this;
+	}
+	// b++
+	BowlingBall operator++(int) {
+		BowlingBall tmp(*this);
+		weight++;
+		return tmp;
+	}
+	bool operator==(const BowlingBall& other) const {                  //ПЕРЕОПРЕДЕЛЯЕМ ==
+    return ((weight == other.weight)&&(color == other.color));
+	}
+  
+	bool operator>(const BowlingBall& other) const {                  //ПЕРЕОПРЕДЕЛЯЕМ >
+    return weight > other.weight;
+	}
+};
+
+int BowlingBall::count = 0;
+
+int main()
+{
+    int count, maxindex;
+    BowlingBall s;
+	BowlingBall b(5, "White");
+	b.setColor("Purple");
+	b.print();
+	BowlingBall b1(7, "RedGreenBlue");
+	b1.print();
+	BowlingBall b2(3, "Yellow");
+	b2.print();
+	BowlingBall b3(9, "Blue");
+	b3.print();
+	BowlingBall b4(4, "Cold");
+	b4.print();
+	count=(BowlingBall::count)-1;
+	BowlingBall *mas;
+	mas = new BowlingBall [count];
+	mas[0]=b; mas[1]=b1; mas[2]=b2; mas[3]=b3; mas[4]=b4;
+	cout<<"NEW ORDER:"<<endl;
+	for (int j=0; j<count; j++){
+	s=mas[j];
+		for (int i=j; i<count; i++){
+		    if (mas[i]>s){
+		        s=mas[i];
+		        maxindex=i;
+		    }
+		}
+		    swap (mas[maxindex], mas[j]);
+	}
+	for (int i=0; i<count; i++){
+	    mas[i].print();
+	}
+	return 0;
+}
