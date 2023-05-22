@@ -1,0 +1,48 @@
+//Разница между постфиксным и префиксным инкрементом в C++ заключается в том, когда обновляется значение переменной.
+//Префиксный инкремент увеличивает значение переменной на единицу и затем возвращает новое значение:
+//В то же время префиксный действует оперативно. Два примера
+
+//Постфиксный инкремент
+#include <iostream>
+
+#include <iostream>
+
+using namespace std;
+
+class Example {
+public:
+    Example operator++(int) {
+        Example temp(*this);
+        ++m_value;
+        return temp;
+    }
+    int m_value;
+};
+
+int main() {
+    Example ex;
+    cout<<ex.m_value++<<endl;
+    cout<<ex.m_value;
+    return 0;
+}
+
+//Префиксный инкремент
+#include <iostream>
+
+using namespace std;
+
+class Example {
+public:
+    Example operator++(int) {
+        Example temp(*this);
+        ++m_value;
+        return temp;
+    }
+    int m_value;
+};
+
+int main() {
+    Example ex;
+    cout<<++ex.m_value<<endl;
+    return 0;
+}
