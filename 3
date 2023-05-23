@@ -1,0 +1,13 @@
+	//Нужно  создать статический метод (либо внешнюю функцию) для сравнения двух шаров, 
+  //Такую, чтобы с её помощью сортировать шары по убыванию веса, а при равенстве по цвету лексикографически.
+  
+  //Если добавить переменную color в public, то возможно следующее решение
+  
+  static bool isGreater(const BowlingBall &x, const BowlingBall &y){
+	    if (x>y) return 1;
+	    else if (y>x) return 0;
+	    else{
+	        if (x.color.compare(y.color)>0) return 0;
+	        else return 1;
+	    }
+	}
